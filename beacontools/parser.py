@@ -5,13 +5,14 @@ from .structs import LTVFrame
 from .packet_types import EddystoneUIDFrame, EddystoneURLFrame, EddystoneEncryptedTLMFrame, \
                           EddystoneTLMFrame, EddystoneEIDFrame, IBeaconAdvertisement, \
                           EstimoteTelemetryFrameA, EstimoteTelemetryFrameB, EstimoteNearable, \
-                          CJMonitorAdvertisement, ExposureNotificationFrame
+                          CJMonitorAdvertisement, ExposureNotificationFrame, \
+                          RuuviTagFrame
 from .const import EDDYSTONE_TLM_UNENCRYPTED, EDDYSTONE_TLM_ENCRYPTED, SERVICE_DATA_TYPE, \
                    EDDYSTONE_UID_FRAME, EDDYSTONE_TLM_FRAME, EDDYSTONE_URL_FRAME, \
                    EDDYSTONE_EID_FRAME, EDDYSTONE_UUID, ESTIMOTE_UUID, ESTIMOTE_TELEMETRY_FRAME, \
                    ESTIMOTE_TELEMETRY_SUBFRAME_A, ESTIMOTE_TELEMETRY_SUBFRAME_B, \
                    MANUFACTURER_SPECIFIC_DATA_TYPE, ESTIMOTE_MANUFACTURER_ID, CJ_MANUFACTURER_ID, \
-                   IBEACON_MANUFACTURER_ID, EXPOSURE_NOTIFICATION_UUID
+                   IBEACON_MANUFACTURER_ID, EXPOSURE_NOTIFICATION_UUID, RUUVITAG_MANUFACTURER_ID
 
 # pylint: disable=invalid-name,too-many-return-statements
 
@@ -49,6 +50,9 @@ def parse_ltv_packet(packet):
 
                 elif data["company_identifier"] == IBEACON_MANUFACTURER_ID:
                     return IBeaconAdvertisement(data['data'])
+
+                elif data['company_identifier'] == RUUVITAG_MANUFACTURER_ID:
+                    return RuuviTagFrame(packet)
 
     except ConstructError:
         return None

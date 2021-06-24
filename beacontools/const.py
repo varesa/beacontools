@@ -11,7 +11,8 @@ class ScannerMode(IntEnum):
     MODE_ESTIMOTE = 4
     MODE_CJMONITOR = 8
     MODE_EXPOSURE_NOTIFICATION = 16
-    MODE_ALL = MODE_IBEACON | MODE_EDDYSTONE | MODE_ESTIMOTE | MODE_CJMONITOR  | MODE_EXPOSURE_NOTIFICATION
+    MODE_RUUVITAG = 32
+    MODE_ALL = MODE_IBEACON | MODE_EDDYSTONE | MODE_ESTIMOTE | MODE_CJMONITOR | MODE_EXPOSURE_NOTIFICATION | MODE_RUUVITAG
 
 
 # hci le scan parameters
@@ -115,3 +116,6 @@ CJ_TEMPHUM_TYPE = 0x10fe
 # for COVID-19 Exposure Notifications
 # see https://blog.google/documents/70/Exposure_Notification_-_Bluetooth_Specification_v1.2.2.pdf
 EXPOSURE_NOTIFICATION_UUID = b"\x6f\xfd"
+
+# for RuuviTag
+RUUVITAG_MANUFACTURER_ID = b"\x99\x04"

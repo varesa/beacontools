@@ -1,5 +1,5 @@
 """Filters passed to the BeaconScanner to filter results."""
-from .const import CJ_MANUFACTURER_ID, CJ_TEMPHUM_TYPE
+from .const import CJ_MANUFACTURER_ID, CJ_TEMPHUM_TYPE, RUUVITAG_MANUFACTURER_ID
 from .utils import is_valid_mac
 
 
@@ -97,6 +97,17 @@ class ExposureNotificationFilter(DeviceFilter):
             raise ValueError("ExposureNotificationFilter needs identifier to be set")
         self.properties['identifier'] = identifier
 
+
+class RuuviTagFilter(DeviceFilter):
+    """Filter for CJ Monitor."""
+
+    def __init__(self, company_id=RUUVITAG_MANUFACTURER_ID):
+        """Initialize filter."""
+        super().__init__()
+        if company_id is None:
+            raise ValueError("RuuviTagFilter needs company_id set")
+        if company_id is not None:
+            self.properties['company_id'] = company_id
 
 class BtAddrFilter(DeviceFilter):
     """Filter by bluetooth address."""

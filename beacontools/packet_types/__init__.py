@@ -5,3 +5,4 @@ from .ibeacon import IBeaconAdvertisement
 from .estimote import EstimoteTelemetryFrameA, EstimoteTelemetryFrameB, EstimoteNearable
 from .controlj import CJMonitorAdvertisement
 from .exposure_notification import ExposureNotificationFrame
+from .ruuvitag import RuuviTagFrame

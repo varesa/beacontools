@@ -12,6 +12,7 @@ from .const import (CJ_MANUFACTURER_ID, EDDYSTONE_UUID,
                     ESTIMOTE_MANUFACTURER_ID, ESTIMOTE_UUID,
                     EVT_LE_ADVERTISING_REPORT, EXPOSURE_NOTIFICATION_UUID,
                     IBEACON_MANUFACTURER_ID, IBEACON_PROXIMITY_TYPE,
+                    RUUVITAG_MANUFACTURER_ID,
                     LE_META_EVENT, MANUFACTURER_SPECIFIC_DATA_TYPE,
                     MS_FRACTION_DIVIDER, OCF_LE_SET_SCAN_ENABLE,
                     OCF_LE_SET_SCAN_PARAMETERS, OGF_LE_CTL,
@@ -137,6 +138,8 @@ class Monitor(threading.Thread):
             self.kwtree.add(bytes([MANUFACTURER_SPECIFIC_DATA_TYPE]) + CJ_MANUFACTURER_ID)
         if self.mode & ScannerMode.MODE_EXPOSURE_NOTIFICATION:
             self.kwtree.add(service_uuid_prefix + EXPOSURE_NOTIFICATION_UUID)
+        if self.mode & ScannerMode.MODE_RUUVITAG:
+            self.kwtree.add(bytes([MANUFACTURER_SPECIFIC_DATA_TYPE]) + RUUVITAG_MANUFACTURER_ID)
         self.kwtree.finalize()
 
     def run(self):
